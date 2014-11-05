@@ -44,6 +44,51 @@ class Point{
       yLoc = map(float(y-yOffset),height,0,yMin,yMax);
     }
   }
+  
+//  void displayCoordinates(){
+//    textSize(height/30);
+//    int vertOffset=0;
+//    int horizOffset=0;
+//    
+////    if (xLoc<((xMin+xMax)/2)){
+////      horizOffset=10;
+////      textAlign(LEFT);
+////    } else{
+////      horizOffset=-10;
+////      textAlign(RIGHT);
+////    }
+//    
+////    if (yLoc<((yMin+yMax)/2)){
+////      vertOffset=30;
+////    } else{
+////      vertOffset=-30;
+////    }
+//    textSize(dDisp);
+//    if (xLoc<0){
+//      //vertOffset=30;
+//      horizOffset=3*dDisp/4;
+//      textAlign(LEFT,CENTER);
+//    }
+//    else {
+//      //vertOffset=30;
+//      horizOffset=-3*dDisp/4;
+//      textAlign(RIGHT, CENTER);
+//    }
+//    if (yLoc<0){
+//      vertOffset=-height/25;
+//      //horizOffset=20;
+//      //textAlign(LEFT);
+//    }
+//    else {
+//      vertOffset=height/30;
+//      //horizOffset=-20;
+//      //textAlign(RIGHT);
+//    }
+//    fill(255);
+//    text("("+String.format("%.2f",xLoc)+","+String.format("%.2f",yLoc)+")",map(xLoc,xMin, xMax, 0, width)+horizOffset+2, map(yLoc,yMin, yMax, height,0)+vertOffset+2);
+//    fill(0);
+//    text("("+String.format("%.2f",xLoc)+","+String.format("%.2f",yLoc)+")",map(xLoc,xMin, xMax, 0, width)+horizOffset, map(yLoc,yMin, yMax, height,0)+vertOffset); 
+//  }
 
  void displayCoordinates(){
     textSize(height/30);

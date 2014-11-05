@@ -1,6 +1,6 @@
 class Point{
-  float xLoc;  //xlocation in cartesian coordinates
-  float yLoc;  //ylocation in cartesian coordinates
+  int xLoc;  //xlocation in cartesian coordinates
+  int yLoc;  //ylocation in cartesian coordinates
   int dDisp=16;  //display diameter of point
   boolean dragging=false;
   int xOffset;  //in pixels
@@ -10,13 +10,13 @@ class Point{
   }
   
   void display(){
-    dDisp=height/20;
+    dDisp=height/15;
     stroke(0);
     if (dragging) drawGuides();
     noStroke();
-    fill(0,0,255);
+    fill(0);
     ellipseMode(CENTER);
-    if (contains(mouseX, mouseY)) fill(0,255,0);
+    if ((contains(mouseX, mouseY))||dragging) fill(150);
     ellipse(map(xLoc,xMin,xMax,0,width),map(yLoc,yMin,yMax,height,0), dDisp, dDisp);
     displayCoordinates();
   }
@@ -40,12 +40,12 @@ class Point{
   
   void drag(int x, int y){
     if (dragging){
-      xLoc = map(float(x-xOffset),0,width,xMin,xMax);
-      yLoc = map(float(y-yOffset),height,0,yMin,yMax);
+      xLoc=xMin+int((float(x-xOffset)/width)*(xMax-xMin)+0.5);
+      yLoc=yMax-int((float(y-yOffset)/height)*(yMax-yMin)+0.5);
     }
   }
-
- void displayCoordinates(){
+  
+  void displayCoordinates(){
     textSize(height/30);
     int vertOffset=0;
     int horizOffset=0;
@@ -62,21 +62,21 @@ class Point{
     }
     else {
       //vertOffset=30;
-      horizOffset=-3*dDisp/4-int(textWidth("("+String.format("%.2f",xLoc)+","+String.format("%.2f",yLoc)+")"));      
+      horizOffset=-3*dDisp/4-int(textWidth("("+str(xLoc)+","+str(yLoc)+")"));      
     }
     textAlign(LEFT,CENTER);
     fill(255);
-    text("("+String.format("%.2f",xLoc)+","+String.format("%.2f",yLoc)+")",map(xLoc,xMin, xMax, 0, width)+horizOffset+2, map(yLoc,yMin, yMax, height,0)+vertOffset+2);
+    text("("+str(xLoc)+","+str(yLoc)+")",map(xLoc,xMin, xMax, 0, width)+horizOffset+2, map(yLoc,yMin, yMax, height,0)+vertOffset+2);
     fill(0);
     text("(",map(xLoc,xMin, xMax, 0, width)+horizOffset, map(yLoc,yMin, yMax, height,0)+vertOffset);
     fill(xColour);
-    text(String.format("%.2f",xLoc),map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("), map(yLoc,yMin, yMax, height,0)+vertOffset);
+    text(str(xLoc),map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("), map(yLoc,yMin, yMax, height,0)+vertOffset);
     fill(0);
-    text(",",map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("+String.format("%.2f",xLoc)), map(yLoc,yMin, yMax, height,0)+vertOffset);
+    text(",",map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("+str(xLoc)), map(yLoc,yMin, yMax, height,0)+vertOffset);
     fill(yColour);
-    text(String.format("%.2f",yLoc),map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("+String.format("%.2f",xLoc)+","), map(yLoc,yMin, yMax, height,0)+vertOffset);
+    text(str(yLoc),map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("+str(xLoc)+","), map(yLoc,yMin, yMax, height,0)+vertOffset);
     fill(0);
-    text(")",map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("+String.format("%.2f",xLoc)+","+String.format("%.2f",yLoc)), map(yLoc,yMin, yMax, height,0)+vertOffset);
+    text(")",map(xLoc,xMin, xMax, 0, width)+horizOffset+textWidth("("+str(xLoc)+","+str(yLoc)), map(yLoc,yMin, yMax, height,0)+vertOffset);
   }
   
   void drawGuides(){
