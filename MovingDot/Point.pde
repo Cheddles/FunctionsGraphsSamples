@@ -17,6 +17,7 @@ class Point{
   }
   
   void display(){
+    xValue=x;
     int yPlot=YCoordToPix(yValue);  //calculate a vertical screen position for the dot from the y value
     int xPlot=XCoordToPix(xValue);  //calculate a horizontal screen position for the dot from the x value
     int dotSize=XCoordToPix(xMin+2*xIncrement);
