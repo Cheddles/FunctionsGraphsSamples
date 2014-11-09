@@ -1,8 +1,10 @@
 float xMin=-10;  // left side of the display region
 float xMax=10;   // right side of the display region
+float xInterval=1;  // how far apart tick marks and grid lines are along the x-axis
 float yMin=-10;  // bottom of the display region
 float yMax=100;  // top of the display region
-float xIncrement=0.05;  // how much the x value of the dot increases each step
+float yInterval=10;  // how far apart tick marks and grid lines are along the y-axis
+float xIncrement=1;  // how much the x value of the dot increases each step
 float x;          // x value of the current trace (for all points)
 
 color yColour = color(255,0,0);  // set a colour linked to the y-axis and y-values
@@ -20,7 +22,7 @@ void setup(){
   if (frame != null) {         // check if the program is running in a frame
     frame.setResizable(true);  // allow the user to resize (and maximise) the window 
   }
-  frameRate(20);  // set the number of times per second that the draw() method is run
+  frameRate(2);  // set the number of times per second that the draw() method is run
   
   x=xMin;    // set x to far left of window
   point1.colour=color(0,0,0); // set point1 to be displayed in black
@@ -28,7 +30,7 @@ void setup(){
 }
 
 void draw(){
-  fadeScreen(95);  // cover the whole window with a translucent rectangle to "fade out" previously-drawn items
+  fadeScreen(min(1,2*xInterval/(xMax-xMin)));  // cover the whole window with a translucent rectangle to "fade out" previously-drawn items
   
   // Calculate the y values of the point(s)
   point1.yValue=f(x);  // calculate the y value as a function of its current x value
@@ -62,8 +64,8 @@ float g(float x){  //  This is the function f(x) that is used to calculate a val
   return output;  // returns the value calculated above
 }
 
-void fadeScreen(float percent){
-  fill(255, map(percent,100,0,0,255));  // set a white fill with transparency set by indicated percentage
+void fadeScreen(float proportion){
+  fill(255, map(proportion,0,1,0,255));  // set a white fill with transparency set by indicated percentage
   noStroke();
   rectMode(NORMAL);
   rect(0,0,width,height);

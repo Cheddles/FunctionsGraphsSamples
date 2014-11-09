@@ -1,13 +1,16 @@
 class Axes{
-  float intercept=0;  //value that the axis crosses the other
+  float xIntercept=0;  // x-value of the y axis
+  float yIntercept=0;  // y-value of the x axis
   
   Axes(){
+    if (xMin>0) xIntercept=xMin;
+    else if (xMax<0) xIntercept=xMax;
+    
+    if (yMin>0) yIntercept=yMin;
+    else if (yMax<0) yIntercept=yMax;
   }
   
   void display(){
-
-    float ySteps=yMax-yMin+1;
-    float xSteps=xMax-xMin+1;
     int arrowLength=(height+width)/70;
     strokeWeight(3);
     stroke(yColour);
@@ -17,7 +20,11 @@ class Axes{
       arrowHead(int(map(0,xMin,xMax,0,width)), 0, 0, arrowLength);
       arrowHead(int(map(0,xMin,xMax,0,width)), height, PI, arrowLength);
     }
-//    stroke(yColour);
+    stroke(yColour);
+    int i=xIntercept
+    while (){
+      
+    }
 //    for(int i=1; i<ySteps; i++){  //draw tick marks for y axis
 //      line(map(0,xMin,xMax,0,width),map(i,0,ySteps,0,height),map(0,xMin,xMax,0,width)-(height+width)/300, map(i,0,ySteps,0,height));
 //      //fill(0);
