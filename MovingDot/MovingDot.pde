@@ -1,6 +1,6 @@
-float xMin=0;  // left side of the display region
+float xMin=-10;  // left side of the display region
 float xMax=20;   // right side of the display region
-float xInterval=2;  // how far apart tick marks and grid lines are along the x-axis
+float xInterval=5;  // how far apart tick marks and grid lines are along the x-axis
 float yMin=-50;  // bottom of the display region
 float yMax=200;  // top of the display region
 float yInterval=50;  // how far apart tick marks and grid lines are along the y-axis
@@ -11,9 +11,9 @@ color yColour = color(255,0,0);  // set a colour linked to the y-axis and y-valu
 color xColour = color(0,0,255);  // set a colour linked to the y-axis and y-values
 
 Axes axes = new Axes();    // create the x-axis, y-axis and gridline system
-Point point1 = new Point("f(x)", xMin,0);  // create a new point with x-coordinate set to the left side of the display region
-Point point2 = new Point("g(x)", xMin,1);  // create a new point with x-coordinate set to the left side of the display region
-Point point3 = new Point("f(g(x))", xMin,2);  // create a new point with x-coordinate set to the left side of the display region
+Point point1 = new Point("f(x)",0);  // create a new point with x-coordinate set to the left side of the display region
+Point point2 = new Point("g(x)",1);  // create a new point with x-coordinate set to the left side of the display region
+Point point3 = new Point("f(g(x))",2);  // create a new point with x-coordinate set to the left side of the display region
 
 
 void setup(){
@@ -35,9 +35,14 @@ void draw(){
   fadeScreen(min(1,2*xInterval/(xMax-xMin)));  // cover the whole window with a translucent rectangle to "fade out" previously-drawn items
   
   // Calculate the y values of the point(s)
-  point1.yValue=f(x);  // calculate the y value as a function of its current x value
-  point2.yValue=g(x);  // calculate the y value as a function of its current x value
-  point3.yValue=f(g(x));  // calculate the y value as a function of its current x value
+  point1.y=f(x);  // calculate the y value as a function of its current x value
+  point2.y=g(x);  // calculate the y value as a function of its current x value
+  point3.y=f(g(x));  // calculate the y value as a function of its current x value
+  
+  // update x-vauoes of the point(s)
+  point1.x=x;
+  point2.x=x;
+  point3.x=x;
 
   axes.display();    // display the background axes (including gridlines)
   point1.display();  // display the point(s)

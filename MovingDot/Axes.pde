@@ -104,6 +104,12 @@ class Axes{
       arrowHead(int(map(xMax,xMin,xMax,0,width)), int(map(0,yMin,yMax,height,0)), PI/2, arrowLength);
       arrowHead(0, int(map(0,yMin,yMax,height,0)), 1.5*PI, arrowLength);
     }
+    stroke(255);
+    strokeWeight(1);
+    line(map(x-xIncrement,xMin,xMax,0,width),0,map(x-xIncrement,xMin,xMax,0,width),height);
+    stroke(0);
+    strokeWeight(1);
+    line(map(x,xMin,xMax,0,width),0,map(x,xMin,xMax,0,width),height);
   }
 
   void arrowHead(int x, int y, float angle, int headLength){

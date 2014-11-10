@@ -1,8 +1,8 @@
 class Point{
   String name;
   int index;    //which point is this in the collection
-  float xValue;  //xlocation in cartesian coordinates
-  float yValue;  //ylocation in cartesian coordinates
+  float x;  //xlocation in cartesian coordinates
+  float y;  //ylocation in cartesian coordinates
   int dDisp=16;  //display diameter of point
   boolean dragging=false;
   int xOffset;  //in pixels
@@ -10,16 +10,15 @@ class Point{
   color colour;  // display colour for the point
   float lastLength;  // width of the coordinates at the previous iteration
   
-  Point(String label, float xInit, int count){
+  Point(String label, int count){
     name=label;
-    xValue=xInit;
     index=count;
   }
   
   void display(){
-    xValue=x;
-    int yPlot=YCoordToPix(yValue);  //calculate a vertical screen position for the dot from the y value
-    int xPlot=XCoordToPix(xValue);  //calculate a horizontal screen position for the dot from the x value
+    //x=x;
+    int yPlot=YCoordToPix(y);  //calculate a vertical screen position for the dot from the y value
+    int xPlot=XCoordToPix(x);  //calculate a horizontal screen position for the dot from the x value
     int dotSize=XCoordToPix(xMin+2*xIncrement);
     dDisp=int(width*(xIncrement/(xMax-xMin)))+1;
     stroke(0);
@@ -46,14 +45,14 @@ class Point{
     fill(0);
     text(": (",xPos+textWidth(name), yPos);
     fill(xColour);
-    text(String.format("%.2f",xValue),xPos+textWidth(name+": ("), yPos);
+    text(String.format("%.2f",x),xPos+textWidth(name+": ("), yPos);
     fill(0);
-    text(",",xPos+textWidth(name+": ("+String.format("%.2f",xValue)), yPos);
+    text(",",xPos+textWidth(name+": ("+String.format("%.2f",x)), yPos);
     fill(yColour);
-    text(String.format("%.2f",yValue),xPos+textWidth(name+": ("+String.format("%.2f",xValue)+","), yPos);
+    text(String.format("%.2f",y),xPos+textWidth(name+": ("+String.format("%.2f",x)+","), yPos);
     fill(0);
-    text(")",xPos+textWidth(name+": ("+String.format("%.2f",xValue)+","+String.format("%.2f",yValue)), yPos);
-    lastLength=textWidth(name+": ("+String.format("%.2f",xValue)+","+String.format("%.2f",yValue)+")");
+    text(")",xPos+textWidth(name+": ("+String.format("%.2f",x)+","+String.format("%.2f",y)), yPos);
+    lastLength=textWidth(name+": ("+String.format("%.2f",x)+","+String.format("%.2f",y)+")");
   }
   
   int XCoordToPix(float coordinate){
