@@ -37,8 +37,8 @@ class Point{
     int yPos=int(1.5*textHeight*(1+index)); //screen location in pixels
     
     rectMode(CENTER);
-    fill(255);
-    rect(xPos+lastLength/2, yPos,1.2*lastLength, 1.2*textHeight);
+    fill(255,255,200);
+    rect(xPos+lastLength/2, yPos,lastLength, 1.2*textHeight);
     
     textAlign(LEFT,CENTER);
     fill(colour);

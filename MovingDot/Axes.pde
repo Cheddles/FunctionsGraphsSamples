@@ -11,7 +11,24 @@ class Axes{
   }
   
   void display(){
+    float xGridStart;  // minimum x value of vertical grid lines
+    float yGridStart;  // minimum y value of horizontal grid lines
     int arrowLength=(height+width)/70;
+    
+    //draw gridlines first to ensure that they are on the bottom layer
+    strokeWeight(1);
+    stroke(200);      
+    if((yMin<=0)&&(yMax>=0)) yGridStart=yMin+(-yMin%yInterval);
+    else yGridStart=yMin;
+    for(int i=1; i<=int((yMax-yMin)/yInterval); i++){  //horizontal gridlines
+      line(0,map(yMin+yInterval*i,yMin,yMax,height,0),width, map(yMin+yInterval*i,yMin,yMax,height,0)); // grid lines
+    }
+    if((xMin<=0)&&(xMax>=0)) xGridStart=xMin+(-xMin%xInterval);
+    else xGridStart=xMin;
+    for(int i=1; i<=int((xMax-xMin)/xInterval); i++){  //vertical gridlines
+      line(map(xMin+xInterval*i,xMin,xMax,0,width),0, map(xMin+xInterval*i,xMin,xMax,0,width),height ); // grid lines
+    }
+    
     strokeWeight(3);
     stroke(yColour);
     fill(yColour);
@@ -20,18 +37,12 @@ class Axes{
       arrowHead(int(map(0,xMin,xMax,0,width)), 0, 0, arrowLength);
       arrowHead(int(map(0,xMin,xMax,0,width)), height, PI, arrowLength);
     }
-    stroke(yColour);
-    int i=xIntercept
-    while (){
-      
-    }
-//    for(int i=1; i<ySteps; i++){  //draw tick marks for y axis
-//      line(map(0,xMin,xMax,0,width),map(i,0,ySteps,0,height),map(0,xMin,xMax,0,width)-(height+width)/300, map(i,0,ySteps,0,height));
-//      //fill(0);
-//      textAlign(CENTER, CENTER);
-//      textSize(height/(2*(yMax-yMin)));
-//      if (i<12) text(str(11-i),map(0,xMin,xMax,0,width)/2,map(i,0,ySteps,0,height));
+//    stroke(yColour);
+//    int i=xIntercept
+//    while (){
+//      
 //    }
+
     stroke(xColour);
     fill(xColour);
     if ((yMin<=0)&&(yMax>=0)){  //check that y=0 is within the drawn range
