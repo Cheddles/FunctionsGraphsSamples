@@ -6,7 +6,9 @@ class Point{
   int xOffset;  //in pixels
   int yOffset;  //in pixels
   
-  Point(){
+  Point(int x, int y){
+    xLoc=x;
+    yLoc=y;
   }
   
   void display(){
