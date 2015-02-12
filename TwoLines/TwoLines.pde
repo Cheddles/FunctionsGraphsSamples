@@ -9,13 +9,9 @@ int yMax=7;
 int xSteps=20;  //number of tick marks between xMmin and xMax
 int ySteps=14;  //number of tick marks between yMmin and yMax
 
-Point point1 = new Point(-2,2);
-Point point2 = new Point(3,3);
-Point point3 = new Point(-4,-3);
-Point point4 = new Point(4,-2);
+Point[] points;  //array of points
 
-Line line1 = new Line();
-Line line2 = new Line();
+// Line[] lines;
 
 void setup(){
   size(800,600);
@@ -23,19 +19,28 @@ void setup(){
   if (frame != null) {
     frame.setResizable(true);
   }
+  points = new Point[4];
+  for (int x=0;x<4;x++){
+    points[x]=new Point();
+  }
+  points[0].xLoc=-3;
+  points[0].yLoc=2;
+  points[1].xLoc=3;
+  points[1].yLoc=3;
+  points[2].xLoc=-3;
+  points[2].yLoc=-2;
+  points[3].xLoc=3;
+  points[3].yLoc=-3;
+  // lines = new Line[2];
 }
 
 void draw(){
   background(255);
   drawAxes();
-  point1.drag(mouseX,mouseY);
-  point2.drag(mouseX,mouseY);
-  point3.drag(mouseX,mouseY);
-  point4.drag(mouseX,mouseY);
-  point1.display();
-  point2.display();
-  point3.display();
-  point4.display();
+  for (int x=0;x<4;x++){
+    points[x].drag(mouseX,mouseY);
+    points[x].display();
+  }
   
   fill(0);
   strokeWeight(30);
@@ -43,17 +48,18 @@ void draw(){
 }
 
 void mousePressed(){
-  point1.click(mouseX, mouseY);
-  point2.click(mouseX, mouseY);
-  point3.click(mouseX, mouseY);
-  point4.click(mouseX, mouseY);
+  boolean found=false;
+  for (int x=0;x<4;x++){
+    if(!found){
+      found=points[x].click(mouseX, mouseY);
+    }
+  }
 }
 
 void mouseReleased(){
-  point1.dragging=false;
-  point2.dragging=false;
-  point3.dragging=false;
-  point4.dragging=false;
+  for (int x=0;x<4;x++){
+    points[x].dragging=false;
+  }
 }
 
 void drawAxes(){

@@ -1,6 +1,8 @@
 class Line{
   float m;  // slope of line
   float c;  // y-intercept of the line (x-intercept for vertical line)
+  int p1;  // index of one point defining the line
+  int p2;  // index of the second point defining the line.
   boolean vertical;  // true if vertical line
   
   Line(){ 

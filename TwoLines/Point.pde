@@ -1,14 +1,12 @@
 class Point{
   int xLoc;  //xlocation in cartesian coordinates
   int yLoc;  //ylocation in cartesian coordinates
-  int dDisp=16;  //display diameter of point
+  int dDisp=10;  //display diameter of point
   boolean dragging=false;
   int xOffset;  //in pixels
   int yOffset;  //in pixels
   
-  Point(int x, int y){
-    xLoc=x;
-    yLoc=y;
+  Point(){
   }
   
   void display(){
@@ -20,24 +18,27 @@ class Point{
     ellipseMode(CENTER);
     if ((contains(mouseX, mouseY))||dragging) fill(150);
     ellipse(map(xLoc,xMin,xMax,0,width),map(yLoc,yMin,yMax,height,0), dDisp, dDisp);
-    displayCoordinates();
+    if (dragging){
+      displayCoordinates();
+    }
   }
   
   boolean contains(int x, int y){
-    int rTouch=20;  // acceptable touch radius from point (in pixels)
+    int rTouch=dDisp*2/3;  // acceptable touch radius from point (in pixels)
     int xPix = int(map(xLoc,xMin,xMax,0,width));
     int yPix = int(map(yLoc,yMin,yMax,height,0));
     if ((rTouch*rTouch)>((x-xPix)*(x-xPix)+(y-yPix)*(y-yPix))) return true;
     else return false;
   }
   
-  void click(int x, int y){
+  boolean click(int x, int y){
     if (contains(x,y)){
       dragging=true;
       xOffset=int(x-map(xLoc,xMin,xMax,0,width));
       //testDebug=str(xOffset);
       yOffset=int(y-map(yLoc,yMin,yMax,height,0));
-    }
+      return true;
+    } else return false;
   }
   
   void drag(int x, int y){
